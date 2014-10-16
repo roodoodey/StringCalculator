@@ -50,4 +50,10 @@ public class StringCalculatorTest {
 	{
 		assertEquals(9, Calculator.add("2\n1\n5,1"));
 	}
+
+	@Test
+	public void testCustomDelimiter()
+	{
+		assertEquals(9, Calculator.add("//;\n1;3,2\n1;2"));
+	}
 }
