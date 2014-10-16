@@ -24,5 +24,18 @@ public class StringCalculatorTest {
 	public void testTwoCharacterString()
 	{
 		assertEquals(3, Calculator.add("1,2"));
+		
+	}
+
+	@Test
+	public void testThreeCharacterString()
+	{
+		assertEquals(6, Calculator.add("1,2,3"));
+	}
+
+	@Test
+	public void testFourCharacterString()
+	{
+		assertEquals(7, Calculator.add("3,2,1,1"));
 	}
 }

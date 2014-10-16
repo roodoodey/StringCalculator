@@ -1,5 +1,7 @@
 package ru.is.stringcalculator;
 
+import java.util.Arrays;
+
 public class Calculator
 {
 	public static int add(String text) {
@@ -9,7 +11,14 @@ public class Calculator
 		else if ((text.contains(","))) 
 		{
 			String[] numbers = text.split(",");
-			return 	toInt(numbers[0]) + toInt(numbers[1]);
+
+			int sum = 0;
+			for (int i = 0; i < numbers.length; i++) 
+			{
+				sum += toInt(numbers[i]);
+			}
+
+			return sum;
 		}
 			return Integer.parseInt(text);
 	}
