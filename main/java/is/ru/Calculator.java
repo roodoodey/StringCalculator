@@ -32,17 +32,69 @@ public class Calculator
 			}
 
 			int sum = 0;
-			for (int i = 0; i < numbers.length; i++) 
+
+			try
 			{
-				sum += toInt(numbers[i]);
+				for (int i = 0; i < numbers.length; i++) 
+				{
+					int convertedInt = toInt(numbers[i]);
+
+					if (convertedInt < 0) 
+					{
+						throw new Exception("Negatives not allowed: " + negativeStringNumbers(numbers));
+					}
+
+					sum += convertedInt;
+				}
+
+			}
+			catch(Exception expected)
+			{
+				System.out.println(expected);
 			}
 
 			return sum;
 		}
 	}
 
+	public static void thrownException(String text) throws Exception
+	{
+		String[] numbers = text.split(",");
+
+		for (int i = 0; i < numbers.length; i++ ) {
+
+			int convertedNumber = toInt(numbers[i]);
+			if (convertedNumber < 0) {
+				throw new Exception("Negatives not allowed: " + negativeStringNumbers(numbers));
+			}
+		}
+	}
+
 	private static int toInt(String number)
 	{
+
 		return Integer.parseInt(number);
+	}
+
+	private static String negativeStringNumbers(String[] numbers)
+	{
+		String negativeString = "";
+		for(int i = 0; i < numbers.length; i++)
+		{
+			int convertedInt = toInt(numbers[i]);
+			if (convertedInt < 0) {
+				
+				if (negativeString.equals("")) 
+				{
+					negativeString = negativeString.concat(numbers[i]);
+				}
+				else
+				{
+					negativeString = negativeString.concat("," + numbers[i]);
+				}
+			}
+		}
+
+		return negativeString;
 	}
 }
