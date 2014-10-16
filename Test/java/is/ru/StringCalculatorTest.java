@@ -19,4 +19,10 @@ public class StringCalculatorTest {
 	{
 		assertEquals(1, Calculator.add("1"));
 	}
+
+	@Test
+	public void testTwoCharacterString()
+	{
+		assertEquals(3, Calculator.add("1,2"));
+	}
 }
