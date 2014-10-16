@@ -81,4 +81,10 @@ public class StringCalculatorTest {
 			assertEquals("Negatives not allowed: -1,-2", e.getMessage());
 		}
 	}
+
+	@Test
+	public void testBigNumbers()
+	{
+		assertEquals(34, Calculator.add("20000,32,2,1000"));
+	}
 }

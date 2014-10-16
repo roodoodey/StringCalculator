@@ -44,7 +44,10 @@ public class Calculator
 						throw new Exception("Negatives not allowed: " + negativeStringNumbers(numbers));
 					}
 
-					sum += convertedInt;
+					if (convertedInt < 1000) 
+					{
+						sum += convertedInt;
+					}
 				}
 
 			}
