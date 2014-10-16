@@ -5,10 +5,12 @@ import java.util.Arrays;
 public class Calculator
 {
 	public static int add(String text) {
-		if (text.equals("")) {
+
+		if (text.equals("")) 
+		{
 			return 0;
 		}
-		else if ((text.contains(","))) 
+		else
 		{
 			String[] numbers = text.split(",");
 
@@ -20,7 +22,6 @@ public class Calculator
 
 			return sum;
 		}
-			return Integer.parseInt(text);
 	}
 
 	private static int toInt(String number)
