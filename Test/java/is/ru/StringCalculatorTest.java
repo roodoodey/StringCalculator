@@ -13,4 +13,10 @@ public class StringCalculatorTest {
 	{
 		assertEquals(0, Calculator.add(""));
 	}
+
+	@Test
+	public void testOneCharacterString()
+	{
+		assertEquals(1, Calculator.add("1"));
+	}
 }
