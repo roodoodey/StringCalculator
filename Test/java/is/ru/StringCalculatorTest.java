@@ -38,4 +38,16 @@ public class StringCalculatorTest {
 	{
 		assertEquals(7, Calculator.add("3,2,1,1"));
 	}
+
+	@Test
+	public void testThreeCharacterStringWithNewline()
+	{
+		assertEquals(7, Calculator.add("3\n2,2"));
+	}
+
+	@Test
+	public void testFourCharacterStringWithNewline()
+	{
+		assertEquals(9, Calculator.add("2\n1\n5,1"));
+	}
 }
