@@ -100,4 +100,10 @@ public class StringCalculatorTest {
 	{
 		assertEquals(15, Calculator.add("//[*][%]\n9*2%1\n1,2"));
 	}
+
+	@Test
+	public void testMultipleCustomDelimiterOfAnyLneght()
+	{
+		assertEquals(15, Calculator.add("//[***][%%]\n5***3%%2,2\n3"));
+	}
 }
