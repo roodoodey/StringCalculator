@@ -23,27 +23,47 @@ public class Calculator
 				delimiter = customDelimiter(text.substring(2, endOfDelimiter));
 				// removes the new line and the // prefix for a custom delimeter (hence we eliminate 3)
 				// pkus the length of the delimeter itself.
-
 				String newDelimiter = text.substring(2, endOfDelimiter);
+				String regexForSplit = ",|\n";
 
-				if (newDelimiter.contains("[") || newDelimiter.contains("]")) {
+				// Replace all regular expression meta characters
+				// witht he appropriate characters, the methods
+				// take little overhead.
+				newDelimiter = newDelimiter.replace("*", "\\*");
+				newDelimiter = newDelimiter.replace("?", "\\?");
+				newDelimiter = newDelimiter.replace("+", "\\+");
+				newDelimiter = newDelimiter.replace("$", "\\$");
+				newDelimiter = newDelimiter.replace("^", "\\^")	;
+				
+				// If the string contains a long delimeter or multiple
+				// ones handle them accordingly and add them to the
+				// regex that is used to split the strings
+				// otherwise the string is ready to be added to the regex
+				if (newDelimiter.contains("[") || newDelimiter.contains("]")) 
+				{
 					newDelimiter = newDelimiter.replaceAll("\\[", "");
-					newDelimiter = newDelimiter.replaceAll("\\]", "");
+					newDelimiter = newDelimiter.replaceAll("\\]", ",");
 
-					if (newDelimiter.contains("*") || newDelimiter.contains("$") || newDelimiter.contains("+") || newDelimiter.contains("?")) 
+					int indexOfLastComma = newDelimiter.lastIndexOf(",");
+					newDelimiter = newDelimiter.substring(0, indexOfLastComma);
+
+					String[] allDelimiters = newDelimiter.split(",");
+
+					for (int i = 0; i < allDelimiters.length; i++) 
 					{
-						System.out.println("Print something");
+						String currentDelimiter = allDelimiters[i];
 
-					 	newDelimiter = newDelimiter.replace("*", "\\*");
-						newDelimiter = newDelimiter.replace("$", "\\$");
-						newDelimiter = newDelimiter.replace("+", "\\+");
-						newDelimiter = newDelimiter.replace("?", "\\?");
+						regexForSplit = regexForSplit.concat("|" + currentDelimiter);
+
 					}
+				}
+				else
+				{
+					regexForSplit = regexForSplit.concat("|" + newDelimiter);
 				}
 
 				String stringWithoutCustomDelimeter = text.substring(text.indexOf("\n") + 1);
-				System.out.println("The delimiter is:" + newDelimiter);
-				numbers = stringWithoutCustomDelimeter.split(",|\n" + "|" + newDelimiter);
+				numbers = stringWithoutCustomDelimeter.split(regexForSplit);
 			}
 			else 
 			{

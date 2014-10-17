@@ -94,4 +94,10 @@ public class StringCalculatorTest {
 		assertEquals(23, Calculator.add("//[***]\n3***17,2\n1"));
 		assertEquals(13, Calculator.add("//[---]\n3---2,3\n3---2"));
 	}
+
+	@Test
+	public void testMultipleCustomDelimeter()
+	{
+		assertEquals(15, Calculator.add("//[*][%]\n9*2%1\n1,2"));
+	}
 }
