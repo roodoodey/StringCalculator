@@ -87,4 +87,11 @@ public class StringCalculatorTest {
 	{
 		assertEquals(34, Calculator.add("20000,32,2,1000"));
 	}
+
+	@Test
+	public void testCustomDelimeterOfAnyLength()
+	{
+		assertEquals(23, Calculator.add("//[***]\n3***17,2\n1"));
+		assertEquals(13, Calculator.add("//[---]\n3---2,3\n3---2"));
+	}
 }

@@ -13,18 +13,37 @@ public class Calculator
 		}
 		else
 		{
-			String customDelimiter = "";
+			String delimiter = "";
 			String[] numbers;
 
 			if (text.startsWith("//")) 
 			{
+
 				int endOfDelimiter = text.indexOf("\n");
-				customDelimiter = text.substring(2, endOfDelimiter);
+				delimiter = customDelimiter(text.substring(2, endOfDelimiter));
 				// removes the new line and the // prefix for a custom delimeter (hence we eliminate 3)
 				// pkus the length of the delimeter itself.
-				String stringWithoutCustomDelimeter = text.substring(3 + customDelimiter.length());
-				
-				numbers = stringWithoutCustomDelimeter.split(",|\n" + "|" + customDelimiter);
+
+				String newDelimiter = text.substring(2, endOfDelimiter);
+
+				if (newDelimiter.contains("[") || newDelimiter.contains("]")) {
+					newDelimiter = newDelimiter.replaceAll("\\[", "");
+					newDelimiter = newDelimiter.replaceAll("\\]", "");
+
+					if (newDelimiter.contains("*") || newDelimiter.contains("$") || newDelimiter.contains("+") || newDelimiter.contains("?")) 
+					{
+						System.out.println("Print something");
+
+					 	newDelimiter = newDelimiter.replace("*", "\\*");
+						newDelimiter = newDelimiter.replace("$", "\\$");
+						newDelimiter = newDelimiter.replace("+", "\\+");
+						newDelimiter = newDelimiter.replace("?", "\\?");
+					}
+				}
+
+				String stringWithoutCustomDelimeter = text.substring(text.indexOf("\n") + 1);
+				System.out.println("The delimiter is:" + newDelimiter);
+				numbers = stringWithoutCustomDelimeter.split(",|\n" + "|" + newDelimiter);
 			}
 			else 
 			{
@@ -58,6 +77,18 @@ public class Calculator
 
 			return sum;
 		}
+	}
+
+	public static String customDelimiter(String withoutPrefix)
+	{
+		String delimiter = withoutPrefix.substring(0);
+
+		delimiter = delimiter.replaceAll("\\[", "");
+		delimiter = delimiter.replaceAll("\\]", "");
+		delimiter = delimiter.replaceAll("\n", "");
+
+
+		return delimiter;
 	}
 
 	public static void thrownException(String text) throws Exception
